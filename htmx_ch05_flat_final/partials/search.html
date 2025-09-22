@@ -1,0 +1,16 @@
+<div>
+  <p><strong>Search:</strong> <em>{{q}}</em></p>
+  <ul>
+    <li>Result A for "{{q}}"</li>
+    <li>Result B for "{{q}}"</li>
+  </ul>
+</div>
+<script>
+  // tiny helper to echo querystring "q" if present
+  (function(){
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q') || document.getElementById('live-input')?.value || "";
+    document.currentScript.previousElementSibling.innerHTML =
+      document.currentScript.previousElementSibling.innerHTML.replaceAll("{{q}}", q || "(live)");
+  })();
+</script>

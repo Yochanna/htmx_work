@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HTMX — Chapter 4 (One Page)</title>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; max-width: 860px; margin: 32px auto; line-height: 1.6; }
+    h1 { margin-bottom: 8px; }
+    h2 { margin-top: 28px; border-top: 1px solid #ddd; padding-top: 18px; }
+    .btn { padding: 8px 12px; border: 1px solid #888; border-radius: 6px; cursor: pointer; background: #f5f5f5; }
+    #result { border: 1px dashed #888; padding: 10px; min-height: 40px; margin-top: 8px; }
+    .row { display: flex; gap: 8px; margin-bottom: 10px; }
+    ul { padding-left: 18px; }
+    li { margin: 4px 0; }
+    .card { border: 1px solid #aaa; padding: 12px; border-radius: 8px; max-width: 420px; }
+    .meta { color: #666; font-size: 12px; }
+    .note { background: #fff8db; border: 1px solid #e8d27a; padding: 10px; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>HTMX Chapter 4 — One Page (Targets & Swaps)</h1>
+  <p class="note">All demos below share this single page. Start a local server from this folder so HTMX can fetch fragments from <code>/partials/*</code>.</p>
+
+  <!-- Demo 1 -->
+  <h2>Demo 1 — Send → Update a different target</h2>
+  <button class="btn"
+          hx-get="partials/hello.html"          <!-- [trigger] -->
+          hx-target="#result"                   <!-- [target] -->
+          hx-swap="innerHTML">Load Greeting</button>  <!-- [swap] -->
+  <div id="result"><em>Waiting for content…</em></div>
+
+  <!-- Demo 2 -->
+  <h2>Demo 2 — Append vs Prepend with hx-swap</h2>
+  <div class="row">
+    <button class="btn"
+            hx-get="partials/item.html"        <!-- [trigger-append] -->
+            hx-target="#items"                 <!-- [list-target] -->
+            hx-swap="beforeend">Append Item</button>   <!-- [append] -->
+
+    <button class="btn"
+            hx-get="partials/item.html"        <!-- [trigger-prepend] -->
+            hx-target="#items"                 <!-- [list-target] -->
+            hx-swap="afterbegin">Prepend Item</button> <!-- [prepend] -->
+  </div>
+  <ul id="items">
+    <li><em>Starter item</em></li>
+  </ul>
+
+  <!-- Demo 3 -->
+  <h2>Demo 3 — Replace entire component (outerHTML + closest)</h2>
+  <div class="card">
+    <h3>Profile Card</h3>
+    <p class="meta">Status: <strong>Basic</strong></p>
+
+    <button class="btn"
+            hx-get="partials/card_updated.html" <!-- [trigger-upgrade] -->
+            hx-target="closest .card"           <!-- [closest-target] -->
+            hx-swap="outerHTML">Upgrade</button> <!-- [outerHTML] -->
+  </div>
+
+</body>
+</html>

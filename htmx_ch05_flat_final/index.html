@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HTMX Chapter 5 — Swap Strategies & OOB Updates (One-Page Demos)</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <!-- HTMX CDN -->
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+</head>
+<body>
+  <header class="container">
+    <h1>HTMX Chapter 5 — Swap Strategies & Out‑of‑Band Updates</h1>
+    <p class="lead">All demos on one page. Use the buttons and watch where content is swapped.</p>
+    <div id="notif" class="notif">Notifications will appear here…</div>
+  </header>
+
+  <main class="container grid">
+    <!-- Demo 1: Swap positions -->
+    <section class="card" id="demo1">
+      <h2>Demo 1 — Swap Positions (<code>hx-swap</code>)</h2>
+      <p>Append, prepend, insert before/after, or replace inner content. Target is the list below.</p>
+      <div class="controls">
+        <button hx-get="partials/swap-item.html" hx-target="#demo1-list" hx-swap="innerHTML">innerHTML (replace all)</button>
+        <button hx-get="partials/swap-item.html" hx-target="#demo1-list" hx-swap="beforeend">beforeend (append)</button>
+        <button hx-get="partials/swap-item.html" hx-target="#demo1-list" hx-swap="afterbegin">afterbegin (prepend)</button>
+        <button hx-get="partials/swap-item.html" hx-target="#demo1-list" hx-swap="afterend">afterend (after list)</button>
+        <button hx-get="partials/swap-item.html" hx-target="#demo1-list" hx-swap="beforebegin">beforebegin (before list)</button>
+      </div>
+      <ul id="demo1-list" class="list">
+        <li>Seed item A</li>
+        <li>Seed item B</li>
+      </ul>
+      <div class="result-area" id="demo1-result"></div>
+    </section>
+
+    <!-- Demo 2: Replace element entirely -->
+    <section class="card" id="demo2">
+      <h2>Demo 2 — Replace Element (<code>outerHTML</code>)</h2>
+      <p>Click to replace the card below with an updated version via <code>hx-swap="outerHTML"</code>.</p>
+      <div id="profile-card" class="profile" 
+           hx-get="partials/profile-card.html" 
+           hx-swap="outerHTML"
+           hx-indicator="#demo2-spinner">
+        <h3>Profile: Ada</h3>
+        <p>Role: Researcher</p>
+        <p>Status: <strong>Draft</strong></p>
+      </div>
+      <div id="demo2-spinner" class="spinner" aria-hidden="true"></div>
+      <button class="primary" hx-get="partials/profile-card.html" hx-target="#profile-card" hx-swap="outerHTML">Load Updated Profile</button>
+    </section>
+
+    <!-- Demo 3: Out-of-band updates -->
+    <section class="card" id="demo3">
+      <h2>Demo 3 — Out‑of‑Band Updates (<code>hx-swap-oob</code>)</h2>
+      <p>Response updates the target <em>and</em> the notification bar elsewhere using OOB.</p>
+      <div id="oob-target" class="oob-box">Main area (will be updated)</div>
+      <button class="primary"
+              hx-get="partials/oob-response.html"
+              hx-target="#oob-target"
+              hx-swap="innerHTML"
+              hx-indicator="#demo3-spinner">Load OOB Response</button>
+      <div id="demo3-spinner" class="spinner" aria-hidden="true"></div>
+    </section>
+
+    <!-- Demo 4: Indicators & Triggers -->
+    <section class="card" id="demo4">
+      <h2>Demo 4 — Indicators & Triggers</h2>
+      <p>Show a spinner while loading and trigger requests on different user actions.</p>
+      <div class="row">
+        <input id="live-input" type="text" placeholder="Type to search…"
+               hx-get="partials/search.html" 
+               hx-target="#live-results"
+               hx-trigger="keyup changed delay:300ms"
+               hx-indicator="#demo4-spinner" />
+        <div id="demo4-spinner" class="spinner" aria-hidden="true"></div>
+      </div>
+      <div id="live-results" class="result-area">Results will appear here…</div>
+      <button hx-get="partials/search.html?q=clicked" hx-target="#live-results" class="secondary">Or click me</button>
+    </section>
+  </main>
+
+  <footer class="container small">
+    <p>HTMX Ch5 — One-page multi-demo. Inspect Network tab to see fragment requests.</p>
+  </footer>
+</body>
+</html>
