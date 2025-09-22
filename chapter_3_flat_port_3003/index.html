@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HTMX — Chapter 3 (Flat)</title>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <header>
+    <h1>HTMX — Chapter 3 Demos</h1>
+    <p>Flat HTML + partials. No backend needed.</p>
+  </header>
+
+  <main>
+    <!-- Demo 1: Basic partial load -->
+    <section class="demo">
+      <h2>Demo 1 — Load a Partial</h2>
+      <div id="demo1-target" class="box"></div>
+      <button
+        hx-get="partials/tip.html"
+        hx-target="#demo1-target"
+        hx-swap="innerHTML"
+        class="btn">
+        Load Tip (replace)
+      </button>
+    </section>
+
+    <!-- Demo 2: Swap strategy (append) -->
+    <section class="demo">
+      <h2>Demo 2 — Append Multiple Tips</h2>
+      <div id="demo2-target" class="box"></div>
+      <button
+        hx-get="partials/tip.html"
+        hx-target="#demo2-target"
+        hx-swap="beforeend"
+        class="btn">
+        Add Tip (append)
+      </button>
+    </section>
+
+    <!-- Demo 3: Trigger & Indicator -->
+    <section class="demo">
+      <h2>Demo 3 — Trigger + Loading Indicator</h2>
+      <div id="demo3-target" class="box"></div>
+      <button
+        id="demo3-btn"
+        hx-get="partials/tip_auto.html"
+        hx-target="#demo3-target"
+        hx-swap="beforeend"
+        hx-trigger="click"
+        class="btn">
+        Get Auto Tip
+      </button>
+      <span class="htmx-indicator" id="auto-ind">Loading…</span>
+    </section>
+  </main>
+
+  <footer>
+    <p>Port 3003 — served via <code>python -m http.server 3003</code></p>
+  </footer>
+
+  <!-- Optional: Attach indicator behavior globally -->
+  <script>
+    document.addEventListener("htmx:configRequest", function(evt){
+      // attach indicator for any request initiated by #demo3-btn
+      var el = evt.target;
+      if (el && el.id === "demo3-btn") {
+        document.getElementById("auto-ind").style.display = "inline";
+      }
+    });
+    document.addEventListener("htmx:afterRequest", function(evt){
+      document.getElementById("auto-ind").style.display = "none";
+    });
+  </script>
+</body>
+</html>

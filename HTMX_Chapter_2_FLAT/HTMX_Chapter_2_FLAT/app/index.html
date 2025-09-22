@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HTMX — Chapter 2</title>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  </head>
+  <body>
+    <h1>HTMX — Chapter 2</h1>
+    <p>Running on <code>http://localhost:3002</code></p>
+
+    <button hx-get="partials/hello.html" hx-target="#hello">Load Greeting</button>
+    <div id="hello"></div>
+
+    <div id="swap-box" hx-get="partials/time.html" hx-swap="outerHTML">
+      <em>Click this box to swap it</em>
+    </div>
+  </body>
+</html>
