@@ -1,0 +1,5 @@
+{% for item in items %}
+  <li>{{ item.name }}</li>
+{% empty %}
+  <li><em>No items yet.</em></li>
+{% endfor %}
