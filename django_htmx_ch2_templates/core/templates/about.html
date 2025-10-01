@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}About Page{% endblock %}
+
+{% block content %}
+    <h2>About Us</h2>
+    <p>Learning Django + HTMX the Code College way!</p>
+
+    <button hx-get="{% url 'quote' %}" 
+            hx-target="#quote"
+            hx-swap="innerHTML">
+        Load Quote
+    </button>
+
+    <div id="quote"></div>
+{% endblock %}

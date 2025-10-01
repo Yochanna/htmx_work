@@ -1,0 +1,10 @@
+<div>
+  <h3>Uploaded: {{ title }}</h3>
+  <p><a href="{{ file_url }}" target="_blank">Download File</a></p>
+  {% if file_url|lower|slice:"-4:" in ".jpg,.png,.gif" %}
+    <img src="{{ file_url }}" alt="{{ title }}" width="200">
+  {% endif %}
+  <div>
+    <button hx-get="{% url 'upload' %}" hx-target="#upload-area" hx-swap="outerHTML">Upload Another</button>
+  </div>
+</div>

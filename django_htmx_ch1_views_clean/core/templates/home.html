@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django + HTMX Views</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <h1>Django View Integration + HTMX</h1>
+
+    <button hx-get="{% url 'hello' %}" hx-target="#output" hx-swap="innerHTML">
+        Say Hello
+    </button>
+
+    <button hx-get="{% url 'bye' %}" hx-target="#output" hx-swap="innerHTML">
+        Say Goodbye
+    </button>
+
+    <div id="output" style="margin-top:1em; border:1px solid #ccc; padding:10px;">
+        <!-- HTMX swaps fragments here -->
+    </div>
+</body>
+</html>

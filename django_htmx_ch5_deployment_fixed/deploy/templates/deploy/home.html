@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Concept 5 — Deployment & Structure</title>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'deploy/css/demo.css' %}">
+</head>
+<body>
+  <h1>Concept 5 — Deployment & Structure</h1>
+  <p>Click a button to load content:</p>
+
+  <button hx-get="{% url 'deploy:messages' %}" hx-target="#content">Messages</button>
+  <button hx-get="{% url 'deploy:about' %}" hx-target="#content">About</button>
+  <button hx-get="{% url 'deploy:env_check' %}" hx-target="#content">Env Check</button>
+  <button hx-get="{% url 'deploy:static_test' %}" hx-target="#content">Static Test</button>
+  <a href="{% url 'deploy:health' %}" target="_blank">Health JSON</a>
+
+  <div id="content"><p>Fragments will load here...</p></div>
+</body>
+</html>
