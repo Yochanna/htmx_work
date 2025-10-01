@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Concept 6 — Styling with Tailwind + DaisyUI</title>
+  <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { plugins: [daisyui] }
+  </script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center p-6">
+  <h1 class="text-2xl font-bold mb-6">Concept 6 — Styling with Tailwind & DaisyUI</h1>
+
+  <div class="flex gap-3">
+    <button class="btn btn-primary" hx-get="{% url 'style:card' %}" hx-target="#content">Show Card</button>
+    <button class="btn btn-accent" hx-get="{% url 'style:alert' %}" hx-target="#content">Show Alert</button>
+  </div>
+
+  <div id="content" class="mt-6 w-full max-w-lg"></div>
+</body>
+</html>

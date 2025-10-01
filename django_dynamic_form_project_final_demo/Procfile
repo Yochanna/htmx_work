@@ -1,0 +1,1 @@
+web: gunicorn django_dynamic_form_project.wsgi

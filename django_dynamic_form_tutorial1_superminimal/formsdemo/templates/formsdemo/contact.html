@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Contact Form (Minimal Demo)</h2>
+<div id="form-container"
+     hx-get="{% url 'contact' %}"
+     hx-trigger="load"
+     hx-swap="outerHTML"></div>
+{% endblock %}
