@@ -82,15 +82,14 @@
             <div class="mono small" style="margin:.6rem 0">Selected: <span id="tagsLabel">none</span></div>
           </form>
 
-          <button class="btn"
-              hx-get="/api/filter"
-              hx-trigger="click from:.chip"
-              hx-include="#filterForm"
-              hx-target="#filterResults"
-              hx-swap="innerHTML">
+         <button class="btn"
+           hx-post="/api/filter"
+           hx-include="#filterForm"
+           hx-target="#filterResults"
+            hx-swap="innerHTML">
             Load filtered items
-          </button>
-
+        </button>
+        
           <div id="filterResults" class="mono" style="margin-top:10px;min-height:80px">… click chips, then click button</div>
         </div>
         <div>
@@ -110,10 +109,10 @@
         <div>
           <h2>Demo 3 — Throttle & once</h2>
           <p class="muted small">Drag the slider. <span class="tag">throttle:600ms</span> limits requests; the button uses <span class="tag">once</span> to run a one-off init.</p>
-          <input type="range" id="price" min="0" max="100" value="50" class="input"
-                 hx-get="/api/price"
-                 hx-trigger="input throttle:600ms"
-                 hx-target="#priceOut" />
+          <input type="range" id="price" name="value" min="0" max="100" value="50" class="input"
+              hx-get="/api/price"
+              hx-trigger="input throttle:600ms"
+              hx-target="#priceOut" />
           <div id="priceOut" class="mono" style="margin-top:10px;min-height:40px">Current value: 50 → total = R 750</div>
 
           <button class="btn" 
@@ -273,13 +272,11 @@
       `;
 
       // Register the Service Worker via a Blob URL so we keep a single file
-      if ('serviceWorker' in navigator) {
-        const blob = new Blob([swCode], {type:'text/javascript'});
-        const swURL = URL.createObjectURL(blob);
-        navigator.serviceWorker.register(swURL).catch(err => console.error('SW register failed', err));
-      } else {
-        console.warn('Service Worker not supported in this browser.');
-      }
+     if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log('Service Worker registered!'))
+      .catch(err => console.error('SW failed', err));
+  }
     </script>
   </div>
 </body>
