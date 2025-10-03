@@ -1,6 +1,0 @@
-services:
-  - type: web
-    name: dynamic-form-demo
-    env: python
-    buildCommand: "pip install -r requirements.txt && python manage.py migrate"
-    startCommand: "gunicorn django_dynamic_form_project.wsgi"
